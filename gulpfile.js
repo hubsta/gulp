@@ -35,13 +35,14 @@ gulp.task('jsmin', function() {
     .pipe(concat('functions.min.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('js/min'))
+    .pipe(notify("JS Updated"))
     .pipe(browserSync.stream());
 });
 
 // CSS Minify 
 gulp.task('css', function () {
     var plugins = [
-        autoprefixer({browsers: [' > 5%', 'last 2 versions']}),
+        autoprefixer({browsers: ['last 2 versions']}),
         pxtorem(),
         cssnano({zindex: false, discardEmpty:true, discardComments: true, autoprefixer: false, safe: true})
     ];
@@ -50,6 +51,7 @@ gulp.task('css', function () {
         .pipe(postcss(plugins))
         .pipe(concat('style.css'))
         .pipe(gulp.dest(''))
+        .pipe(notify("Stylesheet Updated"))
         .pipe(browserSync.stream());
 });
 
@@ -74,4 +76,4 @@ gulp.task('watch', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'scripts', 'css']);
+gulp.task('default', ['watch']);
