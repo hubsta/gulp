@@ -67,7 +67,7 @@ gulp.task('images', function() {
 // Rerun the task when a file changes
 gulp.task('watch', function() {
     browserSync.init({
-        proxy: "175eagle.local"
+        proxy: "domainhere.local"
     });
     gulp.watch(paths.watchsass, ['css']);
     gulp.watch(paths.scripts, ['jsmin']);
