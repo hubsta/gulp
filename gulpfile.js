@@ -53,7 +53,7 @@ gulp.task('css', function () {
         .pipe(browserSync.stream());
 });
 
-// Copy all static images
+// Image Optimizing! Beep Bop Beep
 gulp.task('images', function() {
   return gulp.src(paths.images)
     .pipe(changed('dist/images'))
