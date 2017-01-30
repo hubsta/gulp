@@ -47,9 +47,11 @@ gulp.task('css', function () {
         cssnano({zindex: false, discardEmpty:true, discardComments: true, autoprefixer: false, safe: true})
     ];
     return gulp.src(paths.sasspath)
+        .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(plugins))
         .pipe(concat('style.css'))
+        .pipe(sourcemaps.write(''))
         .pipe(gulp.dest(''))
         .pipe(notify("Stylesheet Updated"))
         .pipe(browserSync.stream());
