@@ -42,7 +42,7 @@ gulp.task('jsmin', function() {
 // CSS Minify 
 gulp.task('css', function () {
     var plugins = [
-        autoprefixer({browsers: ['last 2 versions']}),
+        autoprefixer({browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10']}),
         pxtorem(),
         cssnano({zindex: false, discardEmpty:true, discardComments: true, autoprefixer: false, safe: true})
     ];
@@ -63,7 +63,7 @@ gulp.task('images', function() {
     .pipe(changed('dist/images'))
     .pipe(print())
     .pipe(imagemin(
-        [mozjpeg({quality: 70, progressive: 'true'}), imageminOptipng({optimizationLevel: 70})] 
+        [mozjpeg({quality: 80, progressive: 'true'}), imageminOptipng({optimizationLevel: 80})] 
     )) 
     .pipe(gulp.dest('dist/images'));
 });
