@@ -46,15 +46,15 @@ gulp.task('css', function () {
         pxtorem(),
         cssnano({zindex: false, discardEmpty:true, discardComments: true, autoprefixer: false, safe: true})
     ];
-    return gulp.src(paths.sasspath)
+    return gulp.src('sass/style.scss')
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(plugins))
         .pipe(concat('style.css'))
         .pipe(sourcemaps.write(''))
         .pipe(gulp.dest(''))
-        .pipe(notify("Stylesheet Updated"))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream({ match: '**/style.css' }))
+        .pipe(notify({ message: 'Stylesheet Updated', onLast: true }))
 });
 
 // Image Optimizing! Beep Bop Beep
@@ -69,12 +69,16 @@ gulp.task('images', function() {
 });
 
 // Rerun the task when a file changes
-gulp.task('watch', function() {
-    browserSync.init({
-        proxy: "domainhere.local"
-    });
+gulp.task('watch', ['browser-sync'], function() {
     gulp.watch(paths.watchsass, ['css']);
     gulp.watch(paths.scripts, ['jsmin']);
+});
+
+gulp.task('browser-sync', function () {
+    browserSync.init({
+        injectChanges: true,
+        proxy: "domainhere.local"
+    });
 });
 
 // The default task (called when you run `gulp` from cli)
